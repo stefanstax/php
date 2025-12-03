@@ -1,6 +1,7 @@
 <!-- Should be turned into a header image -->
 <?php
 $pageTitle = "Menu";
+$pageKey = 'menu';
 $pageBackground = "pexels-julia-volk-5273044";
 include "inc/header.inc.php";
 ?>

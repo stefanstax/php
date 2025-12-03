@@ -1,5 +1,6 @@
 <?php
 $pageTitle = "Ingredients";
+$pageKey = 'ingredients';
 $pageBackground = "pexels-engin-akyurt-1435904";
 include "inc/header.inc.php";
 ?>

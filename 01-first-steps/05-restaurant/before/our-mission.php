@@ -1,5 +1,6 @@
 <?php
 $pageTitle = "Our mission";
+$pageKey = "our-mission";
 $pageBackground = "pexels-lisa-fotios-1126728";
 include "inc/header.inc.php";
 ?>
