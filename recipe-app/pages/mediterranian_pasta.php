@@ -1,1 +1,2 @@
-<h1>I'm Mediterranian Pasta recipe</h1>
+<?php $overrideBannerTextColor = BannerTextColor::BLACK; ?>
+<h2>I'm mediterranian pasta!</h2>

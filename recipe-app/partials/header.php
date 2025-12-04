@@ -1,15 +1,11 @@
-<?php
-require_once "config/config.php";
-
-?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0 maximum-scale=1.0">
-    <title><?= $pageTitle ?: "Title Not Provided"; ?> </title>
-    <link rel="stylesheet" href="<?php echo $rootUrl; ?>/index.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0 maximum-scale=1.0">
+  <title><?= $pageTitle ?: "Title Not Provided"; ?> </title>
+  <link rel="stylesheet" href="<?php echo ROOT_URL ?>/index.css">
 </head>
 
 <body>

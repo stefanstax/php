@@ -13,12 +13,17 @@ class BannerTextColor
 
 class BannerBgImage
 {
-    const BUSINESS = "citrus_salmon.jpg";
+    const SALMON = "citrus_salmon.jpg";
+    const PASTA = "mediterranian_pasta.jpg";
+    const RISOTTO = "sunset_risotto.jpg";
+    const TACOS = "tropical_tacos.jpg";
 }
 
-function banner($contentFallback, $bgImage = BannerBgImage::BUSINESS, $textColor = BannerTextColor::WHITE)
+function banner($contentFallback, $bgImage = BannerBgImage::SALMON, $textColor = BannerTextColor::WHITE)
 { ?>
-    <section class="full-w p-notDesktop px--20 py--50 ch-text--<?php echo $textColor; ?>" style="background:url('<?php echo buildBackgroundImage($bgImage); ?>')">
-        <?php $contentFallback(); ?>
-    </section>
+<section
+  class="full-w p-notDesktop px--20 py--50 rounded--sm background--cover background--center ch-text--<?php echo $textColor; ?>"
+  style="background:url('<?php echo buildBackgroundImage($bgImage); ?>')">
+  <?php $contentFallback(); ?>
+</section>
 <?php }

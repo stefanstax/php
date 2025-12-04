@@ -37,6 +37,16 @@
   }
 }
 
+/* Background */
+.background--cover {
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+}
+
+.background--position {
+  background-position: center !important;
+}
+
 /* Roll over to children classes */
 .ch-text--white * {
   color: white !important;
