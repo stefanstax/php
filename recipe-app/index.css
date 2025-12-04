@@ -1,0 +1,47 @@
+.text--red {
+  color: red;
+}
+
+.text--black {
+  color: black;
+}
+
+.text--white {
+  color: white;
+}
+
+/* Paddings */
+.p--20 {
+  padding: 1.25em;
+}
+
+.px--20 {
+  padding-left: 1.25em;
+  padding-right: 1.25em;
+}
+
+.py--50 {
+  padding-top: 3em;
+  padding-bottom: 3em;
+}
+
+.py--10 {
+  padding-top: 6em;
+  padding-bottom: 6em;
+}
+
+@media (max-width: 768px) {
+  .py--10 {
+    padding-top: 3em;
+    padding-bottom: 3em;
+  }
+}
+
+/* Roll over to children classes */
+.ch-text--white * {
+  color: white !important;
+}
+
+body {
+  margin: 0px;
+}
