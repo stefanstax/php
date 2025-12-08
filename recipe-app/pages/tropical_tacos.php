@@ -1,1 +1,1 @@
-<?php echo $_GET['recipe'];
+Tropical Tacos

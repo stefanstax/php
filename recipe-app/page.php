@@ -1,5 +1,6 @@
 <?php
 require_once "layout/banner.php";
+
 function includeRecipePage($value)
 {
     return include "pages/{$value}.php";
@@ -23,9 +24,9 @@ $defaultColors = [
 foreach ($recipes as $recipe) {
     if (getRecipeChoice($recipe->url)) {
         banner(function () use ($recipe) { ?>
-<h1><?php echo $recipe->name . " Recipe"; ?></h1>
-<p>I love how the citrus slices and bright colors take a simple salmon recipe and turn it into a beautiful dish.</p>
-<?php }, bgImage: $recipe->image, textColor: BannerTextColor::BLACK);
+            <h1><?php echo $recipe->name . " Recipe"; ?></h1>
+            <p>I love how the citrus slices and bright colors take a simple salmon recipe and turn it into a beautiful dish.</p>
+<?php }, bgImage: $recipe->image);
         includeRecipePage($recipe->url);
     }
 }

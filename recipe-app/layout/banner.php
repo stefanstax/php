@@ -21,9 +21,9 @@ class BannerBgImage
 
 function banner($contentFallback, $bgImage = BannerBgImage::SALMON, $textColor = BannerTextColor::WHITE)
 { ?>
-<section
-  class="full-w p-notDesktop px--20 py--50 rounded--sm background--cover background--center ch-text--<?php echo $textColor; ?>"
-  style="background:url('<?php echo buildBackgroundImage($bgImage); ?>')">
-  <?php $contentFallback(); ?>
-</section>
+    <section
+        class="full-w p-notDesktop px--20 py--50 rounded--sm background--cover background--center ch-text--<?php echo $textColor; ?>"
+        style="background-image: linear-gradient(transparent 0%, rgba(0,0,0,0.7) 50%), url('<?php echo buildBackgroundImage($bgImage); ?>');">
+        <?php $contentFallback(); ?>
+    </section>
 <?php }
