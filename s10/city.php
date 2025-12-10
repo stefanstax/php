@@ -87,7 +87,46 @@ if (!empty($city)) { ?>
     <div style="padding: 0.675em; border-radius: 1.25em; margin-bottom: 1em; background-color: #90D5FF; color: white;">
         <h1 style="font-size: 1.5rem; font-weight: bold;">AQI Weather Data for <?php echo $city; ?></h1>
     </div>
+    <?php
+    $labels = array_keys($stats);
+    sort($labels);
 
+    $pm25 = [];
+    $pm10 = [];
+
+    foreach ($labels as $label) {
+        $measurements = $stats[$label];
+
+        if (count($measurements["pm25"]) !== 0) {
+            $pm25[] = array_sum($measurements["pm25"]) / count($measurements["pm25"]);
+        }
+        if (count($measurements["pm10"]) !== 0) {
+            $pm10[] = array_sum($measurements["pm10"]) / count($measurements["pm10"]);
+        } else {
+            $pm10[] = 0;
+        }
+    }
+
+    $datasets = [];
+    if (array_sum($pm25)) {
+        $datasets[] = [
+            "label" => "AQI, PM2.5 in {$units["pm25"]}",
+            "data" => $pm25,
+            "fill" => false,
+            "borderColor" => "#5152fb",
+            "tension" => 0.1
+        ];
+    }
+    if (array_sum($pm10) > 0) {
+        $datasets[] = [
+            "label" => "AQI, PM2.5 in {$units["pm10"]}",
+            "data" => $pm10,
+            "fill" => false,
+            "borderColor" => "#5152fb50",
+            "tension" => 0.1
+        ];
+    }
+    ?>
     <canvas id="aqi-chart" width="400" height="400"></canvas>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
@@ -96,14 +135,8 @@ if (!empty($city)) { ?>
             const aqiChart = new Chart(ctx, {
                 type: 'line',
                 data: {
-                    labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-                    datasets: [{
-                        label: '# of Votes',
-                        data: [12, 19, 3, 5, 2, 3],
-                        backgroundColor: '#5152fb20',
-                        borderColor: '#5152fb',
-                        borderWidth: 1
-                    }]
+                    labels: <?php echo json_encode($labels); ?>,
+                    datasets: <?php echo json_encode($datasets); ?>
                 },
                 options: {
                     scales: {
