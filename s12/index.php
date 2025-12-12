@@ -10,19 +10,34 @@
 <body>
 
     <?php
-    $handle = opendir(__DIR__ . "/images");
-    $currentFile = readdir($handle);
+    $imagesDirectory = __DIR__ . "/images";
     $images = [];
-    while (($currentFile = readdir($handle)) !== false) {
-        if ($currentFile === "." || $currentFile === "..") {
-            continue;
+
+    if (is_dir($imagesDirectory)) {
+        $handle = opendir($imagesDirectory);
+        while (($file = readdir($handle)) !== false) {
+            if ($file === "." || $file === "..") continue;
+
+            $extension = strtolower(pathinfo($file, PATHINFO_EXTENSION));
+            $isImage = in_array($extension, ["jpg", "jpeg", "png", "webp"]);
+
+            $images[] = [
+                "url" => "/images/" . $file,
+                "content" => $imagesDirectory . "/" . $file
+            ];
         }
-        $currentFile = readdir($handle);
-        $images[] = $currentFile;
     }
     closedir($handle);
-    var_dump($images);
     ?>
+
+
+    <?php foreach ($images as $image => $imageData) {
+
+        var_dump($imageData["content"]);
+    ?>
+        <!-- <img width="200" height="200" style="object-fit: cover;" src="<?php echo "/images/" . $imageData["url"] ?>" alt="">
+        <p><?php readfile($imageData["content"]); ?></p> -->
+    <?php } ?>
 
 </body>
 
