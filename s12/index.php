@@ -15,15 +15,31 @@
 
     if (is_dir($imagesDirectory)) {
         $handle = opendir($imagesDirectory);
+        $allowed_extensions = ["jpg", "jpeg", "png", "svg", "webp"];
         while (($file = readdir($handle)) !== false) {
             if ($file === "." || $file === "..") continue;
 
-            $extension = strtolower(pathinfo($file, PATHINFO_EXTENSION));
-            $isImage = in_array($extension, ["jpg", "jpeg", "png", "webp"]);
+            $extension = pathinfo($file, PATHINFO_EXTENSION);
+
+            if (!in_array($extension, $allowed_extensions)) {
+                continue;
+            }
+
+            $file_name = pathinfo($file, PATHINFO_FILENAME);
+
+            if (file_exists(__DIR__ . "/images/" . $file_name . ".txt")) {
+                $txt = file_get_contents(__DIR__ . "/images/" . $file_name . ".txt");
+                $info = explode("\n", $txt);
+            }
+
+            $title = $info[0];
+            unset($info[0]);
+            $content = array_values($info);
 
             $images[] = [
-                "url" => "/images/" . $file,
-                "content" => $imagesDirectory . "/" . $file
+                "image" => "/images/" . $file,
+                "title" => $title,
+                "content" => $content
             ];
         }
     }
@@ -32,11 +48,10 @@
 
 
     <?php foreach ($images as $image => $imageData) {
-
-        var_dump($imageData["content"]);
     ?>
-        <!-- <img width="200" height="200" style="object-fit: cover;" src="<?php echo "/images/" . $imageData["url"] ?>" alt="">
-        <p><?php readfile($imageData["content"]); ?></p> -->
+        <h2><?php echo $imageData["title"] ?></h2>
+        <img width="200" height="200" style="object-fit: cover;" src="<?php echo rawurlencode($imageData["image"]) ?>" alt="">
+        <p><?php echo $imageData["content"] ?></p>
     <?php } ?>
 
 </body>
