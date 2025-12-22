@@ -5,11 +5,16 @@ function e($value)
     return htmlspecialchars($value, ENT_QUOTES, "UFT-8");
 }
 
-$pdo = new PDO("mysql:host=localhost;dbname=course", "root", "", [
-    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
-]);
+try {
+    $pdo = new PDO("mysql:host=localhost;dbname=course", "root", "", [
+        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
+    ]);
+} catch (PDOException $e) {
+    echo "A problem occured wit hthe database connection";
+    die();
+}
 
-$statement = $pdo->prepare("SELECT id, email FROM users ORDER BY email ASC");
-$statement->execute();
-$results = $statement->fetchAll(PDO::FETCH_ASSOC);
-var_dump($results);
+$stmt = $pdo->prepare('INSERT INTO `notes` (`title`, `content`) VALUES (:title, :content)');
+$stmt->bindValue('title', "🐈‍⬛");
+$stmt->bindValue('content', "🏋️");
+$stmt->execute();
