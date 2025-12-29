@@ -9,10 +9,11 @@ $pdo = new PDO("mysql:host=localhost;dbname=course", "root", "", [
     PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
 ]);
 
-$id = (int)$_GET["id"];
+$title = 'A title (from PHP)';
+$content = 'The content (from PHP)';
 
-$query = "SELECT * FROM `notes` WHERE `id` = {$id}";
-$statement = $pdo->prepare("SELECT id, email FROM users ORDER BY email ASC");
-$statement->execute();
-$results = $statement->fetchAll(PDO::FETCH_ASSOC);
-var_dump($results);
+$stmt = $pdo->prepare("INSERT INTO `notes` (`title`, `content`) VALUES (:title, :content)");
+
+$stmt->bindValue("title", $title);
+$stmt->bindValue("content", $content);
+$stmt->execute();
